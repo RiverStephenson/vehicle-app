@@ -21,7 +21,17 @@ class Truck extends Vehicle {
   // TODO: The types should be as follows: vin (string), color (string), make (string), model (string), year (number), weight (number), topSpeed (number), wheels (Wheel[]), towingCapacity (number)
 
   // TODO: Create a constructor that accepts the properties of the Truck class
-  constructor(started: false, currentSpeed: number, vin: string, color: string, make: string, model: string, year: number, weight: number, topSpeed: number, wheels: Wheel[], towingCapacity: number) {
+  constructor(
+    vin: string,
+    color: string,
+    make: string,
+    model: string,
+    year: number,
+    weight: number,
+    topSpeed: number,
+    wheels: Wheel[],
+    towingCapacity: number,
+  ) {
     super(started, currentSpeed);
 
     this.vin = vin;
