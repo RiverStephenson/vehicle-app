@@ -26,7 +26,7 @@ class Car extends Vehicle {
     wheels: Wheel[]
   ) {
     // Call the constructor of the parent class, Vehicle
-    super(started, currentSpeed);
+    super();
 
     // Initialize properties of the Car class
     this.vin = vin;

@@ -69,7 +69,7 @@ class Cli {
         if (answers.vehicleType === 'Car') {
           // create a car
           this.createCar();
-        }
+        } else if (answers.vehicleType)
         // TODO: add statements to create a truck or motorbike if the user selects the respective vehicle type
       });
   }
@@ -270,7 +270,7 @@ class Cli {
 
   // method to find a vehicle to tow
   // TODO: add a parameter to accept a truck object
-  findVehicleToTow(truck: string): void {
+  findVehicleToTow(truck: Truck): void {
     inquirer
       .prompt([
         {
@@ -287,15 +287,15 @@ class Cli {
       ])
       .then((answers) => {
         // TODO: check if the selected vehicle is the truck
+        // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
         if (answers.vehicle === truck) {
           console.log('The truck cannot tow itself!')
           this.performActions();
         } else {
-          tow(answers.vehicle)
+          truck.tow(answers.vehicle)
         }
-        // TODO: if it is, log that the truck cannot tow itself then perform actions on the truck to allow the user to select another action
-        // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
       });
+      // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
   }
 
   // method to perform actions on a vehicle
