@@ -69,9 +69,14 @@ class Cli {
         if (answers.vehicleType === 'Car') {
           // create a car
           this.createCar();
-        } else if (answers.vehicleType)
+        } else if (answers.vehicleType === 'Truck') {
+          this.createTruck();
+        } else if (answers.vehicleType === 'Motorbike') {
+          this.createMotorbike();
+        };
         // TODO: add statements to create a truck or motorbike if the user selects the respective vehicle type
-      });
+      }
+      );
   }
 
   // method to create a car
@@ -295,7 +300,7 @@ class Cli {
           truck.tow(answers.vehicle)
         }
       });
-      // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
+    // TODO: if it is not, tow the selected vehicle then perform actions on the truck to allow the user to select another action
   }
 
   // method to perform actions on a vehicle
@@ -381,7 +386,21 @@ class Cli {
               this.vehicles[i].reverse();
             }
           }
-        }
+        } else if (answers.action === 'Tow') {
+          let truck: Truck | undefined
+
+          for (let i = 0; i < this.vehicles.length; i++) {
+            if (this.vehicles[i].vin === this.selectedVehicleVin && this.vehicles[i] instanceof Truck) {
+              truck = this.vehicles[i] as Truck;
+            }
+          };
+          if (truck) {
+            this.findVehicleToTow(truck);
+            return truck
+          } else {
+            console.log('You are not in a truck, only trucks can tow.')
+          }
+        } 
         // TODO: add statements to perform the tow action only if the selected vehicle is a truck. Call the findVehicleToTow method to find a vehicle to tow and pass the selected truck as an argument. After calling the findVehicleToTow method, you will need to return to avoid instantly calling the performActions method again since findVehicleToTow is asynchronous.
         // TODO: add statements to perform the wheelie action only if the selected vehicle is a motorbike
         else if (answers.action === 'Select or create another vehicle') {
