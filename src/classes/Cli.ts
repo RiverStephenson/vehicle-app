@@ -62,7 +62,7 @@ class Cli {
           name: 'vehicleType',
           message: 'Select a vehicle type',
           // TODO: Update the choices array to include Truck and Motorbike
-          choices: ['Car'],
+          choices: ['Car', 'Truck', 'Motorbike'],
         },
       ])
       .then((answers) => {
@@ -400,7 +400,22 @@ class Cli {
           } else {
             console.log('You are not in a truck, only trucks can tow.')
           }
-        } 
+        } else if (answers.action === 'Wheelie') {
+          let motorbike: Motorbike | undefined
+
+          for (let i = 0; i < this.vehicles.length; i++) {
+            if (this.vehicles[i].vin === this.selectedVehicleVin && this.vehicles[i] instanceof Motorbike) {
+              motorbike = this.vehicles[i] as Motorbike;
+            }
+          };
+          if (motorbike) {
+            motorbike.wheelie();
+            return motorbike;
+          } else {
+            console.log('You are not in a motorbike, only motorbikes can wheelie.')
+          };
+          this.performActions();
+        }  
         // TODO: add statements to perform the tow action only if the selected vehicle is a truck. Call the findVehicleToTow method to find a vehicle to tow and pass the selected truck as an argument. After calling the findVehicleToTow method, you will need to return to avoid instantly calling the performActions method again since findVehicleToTow is asynchronous.
         // TODO: add statements to perform the wheelie action only if the selected vehicle is a motorbike
         else if (answers.action === 'Select or create another vehicle') {
@@ -414,7 +429,7 @@ class Cli {
         if (!this.exit) {
           // if the user does not want to exit, perform actions on the selected vehicle
           this.performActions();
-        }
+        } return;
       });
   }
 
